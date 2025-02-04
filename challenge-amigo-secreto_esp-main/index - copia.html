@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar y Sortear Amigos</title>
+</head>
+<body>
+    <input type="text" id="nombreAmigo" placeholder="Ingrese el nombre de su amigo">
+    <button onclick="agregarAmigo()">Agregar Amigo</button>
+    <button onclick="sortearAmigo()">Sortear Amigo</button>
+    <ul id="listaAmigos"></ul>
+    <p id="amigoSorteado"></p>
+
+    <script>
+        let amigos = [];
+
+        function agregarAmigo() {
+            const nombreInput = document.getElementById('nombreAmigo');
+            const nombre = nombreInput.value.trim();
+
+            if (nombre === "") {
+                alert("Por favor, inserte un nombre.");
+            } else {
+                amigos.push(nombre);
+                actualizarListaAmigos();
+                nombreInput.value = "";
+            }
+        }
+
+        function actualizarListaAmigos() {
+            const lista = document.getElementById('listaAmigos');
+            lista.innerHTML = "";
+
+            amigos.forEach((amigo) => {
+                const li = document.createElement('li');
+                li.textContent = amigo;
+                lista.appendChild(li);
+            });
+        }
+
+        function sortearAmigo() {
+            if (amigos.length === 0) {
+                alert("No hay amigos disponibles para sortear.");
+            } else {
+                const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+                const amigoSorteado = amigos[indiceAleatorio];
+                document.getElementById('amigoSorteado').innerHTML = `Amigo sorteado: ${amigoSorteado}`;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
